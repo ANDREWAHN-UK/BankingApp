@@ -41,13 +41,36 @@ public class Account {
     }
 
     public void makeWithdrawal(double amount){
+
         if(amount>balance){
             System.out.println("You have insufficient funds");
+            return;
         }
+        balance -= amount;
+        checkInterest();
+        System.out.println("You have withdrawn " + amount + "pounds. Thank you for using us. ");
+        System.out.println("Your balance is now " + balance);
     }
 
     public void makeDeposit(double amount){
 
+        if(amount < 0){
+            System.out.println("You cannot deposit a negative amount.");
+            return;
+        }
+        checkInterest();
+        amount = amount + amount*interest;
+        balance+= amount;
+        System.out.println("You have deposited " + amount + "pounds. Thank you for using us. ");
+        System.out.println("You now have a balance of " + balance);
+    }
+
+    public void checkInterest(){
+        if (balance > 100){
+            interest=0.05;
+        } else {
+            interest = 0;
+        }
     }
 
 

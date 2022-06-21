@@ -7,11 +7,7 @@ public class ISAAccount extends Account{
         this.setBalance(initialDeposit);
         this.setSortCode(445566);
         this.setAccountNumber(numberOfAccounts++);
-        if(initialDeposit>100){
-            this.setInterest(5);
-        } else {
-            this.setInterest(0);
-        }
+        this.checkInterest(); //NB there will be no interest on anything but ISA accounts, this is just here for now because of the video
     }
 
     @Override
@@ -19,6 +15,6 @@ public class ISAAccount extends Account{
         return accountType + "Account\n" +
                 "Account Number: " + this.getAccountNumber() + "\n" +
                 "Balance: " + this.getBalance() + "\n" +
-                "Interest Rate: " + this.getInterest();
+                "Interest Rate: " + this.getInterest() + "\n" ;
     }
 }

@@ -94,6 +94,8 @@ public class Menu {
             account = new ISAAccount(initialDeposit);
         }
 
+        Customer customer = new Customer(firstName, lastName, account);
+        Bank.addCustomer(customer);
     }
 
     private int getInput() {

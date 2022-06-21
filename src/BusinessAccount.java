@@ -6,8 +6,8 @@ public class BusinessAccount extends Account {
         super();
         this.setBalance(initialDeposit);
         this.setSortCode(778899);
-
         this.setAccountNumber(numberOfAccounts++);
+        this.checkInterest(); //NB there will be no interest on anything but ISA accounts, this is just here for now because of the video
     }
 
     @Override
@@ -15,6 +15,6 @@ public class BusinessAccount extends Account {
         return accountType + "Account\n" +
                 "Account Number: " + this.getAccountNumber() + "\n" +
                 "Balance: " + this.getBalance() + "\n" +
-                "Interest Rate: " + this.getInterest();
+                "Interest Rate: " + this.getInterest() + "\n" ;
     }
 }
