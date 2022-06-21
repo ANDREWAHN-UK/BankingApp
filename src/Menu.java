@@ -15,74 +15,21 @@ public class Menu {
         menu.runMenu();
     }
 
-    public void runMenu(){
-        printHeader();
-
-        while(!exit){
-            printMenu();
-            int choice = getInput();
-            performAction(choice);
-        }
-    }
-//populate the initial menu
-    private void printHeader() {
-        System.out.println("+-----------------------------------+");
-        System.out.println("|           Welcome to the          |");
-        System.out.println("|           Novus Bank App          |");
-        System.out.println("+-----------------------------------+");
-    }
-
-    //populate the initial menu
-    private void printMenu() {
-
-        System.out.println("Please make a Selection: ");
-        System.out.println("1. Create a new account");
-        System.out.println("2. Make a deposit");
-        System.out.println("3. Make a withdrawal");
-        System.out.println("4. Check Account Balance");
-        System.out.println("0. Exit");
-    }
-
-    //populate the initial menu
-    private void performAction(int choice) {
-
-        switch (choice) {
-            case 0 -> {
-                System.out.println("Thank you for using our application.");
-                System.exit(0);
-            }
-            case 1 -> createAccount();
-            case 2 -> makeDeposit();
-            case 3 -> makeWithdrawal();
-            case 4 -> checkBalance();
-            default -> System.out.println("Unknown error has occurred. ");
-        }
-    }
-
-    private int getInput() {
-
-        int choice = -1;
-
-        do {
-            System.out.print("Enter your choice: ");
-            try {
-                choice = Keyboard.nextInt();
-            } catch (Exception e) {
-                System.out.println("Invalid selection, numbers only please.");
-            }
-
-            if (choice < 0 || choice > 4) {
-                System.out.println("Choice not possible, please choose from 1 to 4.");
-            }
-        }
-        while  (choice < 0 || choice > 7);
-        return choice;
-    }
-
     private void checkBalance() {
     }
 
     private void makeWithdrawal() {
+        int account = selectAccount();
+        if(account >=0 ) {
+            System.out.println("How much would you like to withdraw? ");
+            double amount;
+            try{
+                amount = Double.parseDouble(Keyboard.nextLine());
+            } catch(NumberFormatException e){
+                amount = 0;
+            }
+            Bank.getCustomer(account).getAccount().makeWithdrawal(amount);
+        }
     }
 
     private void makeDeposit() {
@@ -99,25 +46,26 @@ public class Menu {
         }
 
     }
-//gets run inside makeDeposit();
+//gets run inside makeDeposit() and makeWithdrawal();
     private int selectAccount() {
         ArrayList<Customer> customers = bank.getCustomers();
         if(customers.size() <= 0){
             System.out.println("No customers at your bank.");
             return -1;
         }
-        System.out.println("Select an account: ");
+        System.out.println("These are the available accounts: ");
         for(int i = 0; i< customers.size(); i++){
             System.out.println((i+1) + ")" + customers.get(i).toString());
         }
-        int account;
+        double account = 0;
         System.out.print("Please choose one of the above accounts: ");
-        try {account = Integer.parseInt(Keyboard.nextLine()) -1;
-    }
-        catch(NumberFormatException e){
-            account = -1;
+        try {
+            account = Double.parseDouble(Keyboard.nextLine()) -1;
         }
-        return account;
+        catch(NumberFormatException e){
+            account = 0;
+        }
+        return (int) account;
     }
 
     private void createAccount() {
@@ -171,13 +119,69 @@ public class Menu {
     }
 
 
+    //populate the initial menu
+    private void printHeader() {
+        System.out.println("+-----------------------------------+");
+        System.out.println("|           Welcome to the          |");
+        System.out.println("|           Novus Bank App          |");
+        System.out.println("+-----------------------------------+");
+    }
 
+    //populate the initial menu
+    private void printMenu() {
 
+        System.out.println("Please make a Selection: ");
+        System.out.println("1. Create a new account");
+        System.out.println("2. Make a deposit");
+        System.out.println("3. Make a withdrawal");
+        System.out.println("4. Check Account Balance");
+        System.out.println("0. Exit");
+    }
 
+    //populate the initial menu
+    private void performAction(int choice) {
 
+        switch (choice) {
+            case 0 -> {
+                System.out.println("Thank you for using our application.");
+                System.exit(0);
+            }
+            case 1 -> createAccount();
+            case 2 -> makeDeposit();
+            case 3 -> makeWithdrawal();
+            case 4 -> checkBalance();
+            default -> System.out.println("Unknown error has occurred. ");
+        }
+    }
+    //used in initial menu
+    private int getInput() {
 
+        int choice = -1;
 
+        do {
+            System.out.print("Enter your choice: ");
+            try {
+                choice = Keyboard.nextInt();
+            } catch (Exception e) {
+                System.out.println("Invalid selection, numbers only please.");
+            }
 
+            if (choice < 0 || choice > 4) {
+                System.out.println("Choice not possible, please choose from 1 to 4.");
+            }
+        }
+        while  (choice < 0 || choice > 4);
+        return choice;
+    }
 
+    public void runMenu(){
+        printHeader();
+
+        while(!exit){
+            printMenu();
+            int choice = getInput();
+            performAction(choice);
+        }
+    }
 
 }
