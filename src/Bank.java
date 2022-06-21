@@ -7,11 +7,11 @@ public class Bank {
         customers.add(customer);
     }
 
-  static Customer getCustomer(int account) {
-      return customers.get(account);
+  static Customer getCustomer(double account) {
+      return customers.get((int) account);
     }
 
-    ArrayList<Customer> getCustomers(){
+    static ArrayList<Customer> getCustomers(){
       return customers;
     }
 

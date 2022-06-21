@@ -20,12 +20,12 @@ public class Menu {
 
     private void makeWithdrawal() {
         int account = selectAccount();
-        if(account >=0 ) {
+        if (account >= 0) {
             System.out.println("How much would you like to withdraw? ");
             double amount;
-            try{
+            try {
                 amount = Double.parseDouble(Keyboard.nextLine());
-            } catch(NumberFormatException e){
+            } catch (NumberFormatException e) {
                 amount = 0;
             }
             Bank.getCustomer(account).getAccount().makeWithdrawal(amount);
@@ -34,39 +34,42 @@ public class Menu {
 
     private void makeDeposit() {
         int account = selectAccount();
-        if(account >=0 ) {
+        if (account >= 0) {
             System.out.println("How much would you like to deposit? ");
             double amount;
-            try{
+            try {
                 amount = Double.parseDouble(Keyboard.nextLine());
-            } catch(NumberFormatException e){
+            } catch (NumberFormatException e) {
                 amount = 0;
             }
             Bank.getCustomer(account).getAccount().makeDeposit(amount);
         }
 
     }
-//gets run inside makeDeposit() and makeWithdrawal();
+
+    //gets run inside makeDeposit() and makeWithdrawal();
     private int selectAccount() {
-        ArrayList<Customer> customers = bank.getCustomers();
-        if(customers.size() <= 0){
+        ArrayList<Customer> customers = Bank.getCustomers();
+        if (customers.size() <= 0) {
             System.out.println("No customers at your bank.");
             return -1;
         }
         System.out.println("These are the available accounts: ");
-        for(int i = 0; i< customers.size(); i++){
-            System.out.println((i+1) + ")" + customers.get(i).toString());
+        for (int i = 0; i < customers.size(); i++) {
+            System.out.println((i + 1) + ") " + customers.get(i).toString());
         }
-        double account = 0;
-        System.out.print("Please choose one of the above accounts: ");
+        int account =0;
+        System.out.println("Please choose one of the above accounts: ");
+
         try {
-            account = Double.parseDouble(Keyboard.nextLine()) -1;
+            account = Integer.parseInt(Keyboard.nextLine()) -1;
+        } catch (NumberFormatException e) {
+            account = -1;
         }
-        catch(NumberFormatException e){
-            account = 0;
-        }
-        return (int) account;
+        return account;
     }
+
+
 
     private void createAccount() {
         boolean valid = false;

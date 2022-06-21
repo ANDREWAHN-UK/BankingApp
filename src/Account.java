@@ -48,8 +48,8 @@ public class Account {
         }
         balance -= amount;
         checkInterest();
-        System.out.println("You have withdrawn " + amount + "pounds. Thank you for using us. ");
-        System.out.println("Your balance is now " + balance);
+        System.out.println("You have withdrawn " + amount + " pounds. Thank you for using us. ");
+        System.out.println("Your balance is now " + balance + " pounds. ");
     }
 
     public void makeDeposit(double amount){
@@ -59,15 +59,15 @@ public class Account {
             return;
         }
         checkInterest();
-        amount = amount + amount*interest;
+        amount = amount;
         balance+= amount;
-        System.out.println("You have deposited " + amount + "pounds. Thank you for using us. ");
+        System.out.println("You have deposited " + amount + " pounds. Thank you for using us. ");
         System.out.println("You now have a balance of " + balance);
     }
 
     public void checkInterest(){
         if (balance > 100){
-            interest=0.05;
+            interest=0.0;
         } else {
             interest = 0;
         }
