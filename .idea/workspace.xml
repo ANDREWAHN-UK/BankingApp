@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="94731518-3161-4903-a7d9-74aa57d27c9c" name="Changes" comment="&#10;changed the selectAccount() method to use a double for the account, then return an integer, which allowed the menu selection to actually trigger :) ;">
+    <list default="true" id="94731518-3161-4903-a7d9-74aa57d27c9c" name="Changes" comment="&#10;Going around in circles, I cannot get the selectAccount() method to run properly :(">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Bank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bank.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +69,7 @@
       <workItem from="1655471008669" duration="31000" />
       <workItem from="1655722337954" duration="5193000" />
       <workItem from="1655801739565" duration="172000" />
-      <workItem from="1655805855805" duration="11756000" />
+      <workItem from="1655805855805" duration="12460000" />
     </task>
     <task id="LOCAL-00001" summary="Created classes, created some methods, started with the switches; &#10;todo - follow along on https://www.youtube.com/watch?v=eR3sIf41xeI&amp;ab_channel=IntrotoComputerScience from 11 minutes onwards">
       <created>1655399958504</created>
@@ -115,7 +113,14 @@
       <option name="project" value="LOCAL" />
       <updated>1655817851528</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="&#10;Going around in circles, I cannot get the selectAccount() method to run properly :(">
+      <created>1655820255434</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1655820255434</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -138,6 +143,7 @@
     <MESSAGE value="42 minute point of video;&#10;Create Account seems to work (How can I access breakpoints like in the video?);" />
     <MESSAGE value="55 minute point of video;&#10;Made some changes IntelliJ recommended;&#10;Cannot get makeDeposit() to run, as printMenu() always runs for some reason;" />
     <MESSAGE value="&#10;changed the selectAccount() method to use a double for the account, then return an integer, which allowed the menu selection to actually trigger :) ;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&#10;changed the selectAccount() method to use a double for the account, then return an integer, which allowed the menu selection to actually trigger :) ;" />
+    <MESSAGE value="&#10;Going around in circles, I cannot get the selectAccount() method to run properly :(" />
+    <option name="LAST_COMMIT_MESSAGE" value="&#10;Going around in circles, I cannot get the selectAccount() method to run properly :(" />
   </component>
 </project>

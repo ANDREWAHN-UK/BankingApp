@@ -16,6 +16,14 @@ public class Menu {
     }
 
     private void checkBalance() {
+
+        int account = selectAccount();
+        if (account >= 0) {
+
+            System.out.println(Bank.getCustomer(account).getAccount());
+        } else{
+            System.out.println("Invalid account selected." );
+        }
     }
 
     private void makeWithdrawal() {
@@ -58,15 +66,19 @@ public class Menu {
         for (int i = 0; i < customers.size(); i++) {
             System.out.println((i + 1) + ") " + customers.get(i).toString());
         }
-        int account =0;
+        double account;
         System.out.println("Please choose one of the above accounts: ");
 
         try {
-            account = Integer.parseInt(Keyboard.nextLine()) -1;
+            account = Double.parseDouble(Keyboard.nextLine()) -1;
         } catch (NumberFormatException e) {
             account = -1;
         }
-        return account;
+        if (account < 0 || account > customers.size() ){
+            System.out.println("Invalid Account Selected");
+            account = -1;
+        }
+        return (int) account;
     }
 
 
