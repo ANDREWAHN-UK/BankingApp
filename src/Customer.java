@@ -12,8 +12,18 @@ public class Customer {
     @Override
     public String toString(){
         return "\nCustomer Information:\n" +
-                "First Name: " + firstName +
-                "Last Name: " + lastName +
+                " First Name: " + firstName + "\n" +
+                " Last Name: " + lastName + "\n" +
                 account;
+    }
+
+    public String basicInfo(){
+        return " First Name: " + firstName +
+                " Last Name: " + lastName + " " + account +
+                " Account Number: " + account.getAccountNumber();
+    }
+
+    Account getAccount(){
+        return account;
     }
 }

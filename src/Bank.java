@@ -6,4 +6,13 @@ public class Bank {
   static void addCustomer(Customer customer) {
         customers.add(customer);
     }
+
+  static Customer getCustomer(int account) {
+      return customers.get(account);
+    }
+
+    ArrayList<Customer> getCustomers(){
+      return customers;
+    }
+
 }

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 //this is the menu
@@ -13,89 +14,49 @@ public class Menu {
 
         menu.runMenu();
     }
+
+    public void runMenu(){
+        printHeader();
+
+        while(!exit){
+            printMenu();
+            int choice = getInput();
+            performAction(choice);
+        }
+    }
+//populate the initial menu
+    private void printHeader() {
+        System.out.println("+-----------------------------------+");
+        System.out.println("|           Welcome to the          |");
+        System.out.println("|           Novus Bank App          |");
+        System.out.println("+-----------------------------------+");
+    }
+
+    //populate the initial menu
+    private void printMenu() {
+
+        System.out.println("Please make a Selection: ");
+        System.out.println("1. Create a new account");
+        System.out.println("2. Make a deposit");
+        System.out.println("3. Make a withdrawal");
+        System.out.println("4. Check Account Balance");
+        System.out.println("0. Exit");
+    }
+
+    //populate the initial menu
     private void performAction(int choice) {
 
-        switch (choice){
-            case 0:
-                System.out.println("Thank you for using out application.");
+        switch (choice) {
+            case 0 -> {
+                System.out.println("Thank you for using our application.");
                 System.exit(0);
-                break;
-            case 1:
-                createAccount();
-                break;
-            case 2:
-                makeDeposit();
-                break;
-            case 3:
-                makeWithdrawal();
-                break;
-            case 4:
-                checkBalance();
-                break;
-
-            default:
-                System.out.println("Unknown error has occurred. ");
-        }
-    }
-
-    private void checkBalance() {
-    }
-
-    private void makeWithdrawal() {
-    }
-
-    private void makeDeposit() {
-    }
-
-    private void createAccount() {
-        String firstName, lastName, accountType="";
-        double initialDeposit=0;
-
-        boolean valid = false;
-        while (!valid) {
-            System.out.print("Please enter an account type: Current/Business/ISA");
-            accountType = Keyboard.nextLine();
-            if (accountType.equalsIgnoreCase("current") || accountType.equalsIgnoreCase("business") || accountType.equalsIgnoreCase("ISA")) {
-                valid = true;
-            } else{
-                System.out.println("Invalid account type selected. Please enter Current/Business/ISA");
             }
+            case 1 -> createAccount();
+            case 2 -> makeDeposit();
+            case 3 -> makeWithdrawal();
+            case 4 -> checkBalance();
+            default -> System.out.println("Unknown error has occurred. ");
         }
-        System.out.print("Please enter your first name: ");
-        firstName=Keyboard.nextLine();
-        System.out.print("Please enter your last name: ");
-        lastName=Keyboard.nextLine();
-
-        valid = false;
-        while(!valid){
-            System.out.println("Please enter an initial deposit");
-            try{
-                initialDeposit = Double.parseDouble(Keyboard.nextLine());
-            } catch (Exception e){
-                System.out.println("Deposit must be a number.");
-            }
-            valid = true;
-
-            if(accountType.equalsIgnoreCase("ISA")){
-                if(initialDeposit < 100){
-                    System.out.println("ISA accounts require a minimum of £100 to open");
-                } else {
-                    valid = true;
-                }
-            }
-        }
-
-        Account account;
-        if(accountType.equalsIgnoreCase("Current")){
-            account = new CurrentAccount(initialDeposit);
-        } else if(accountType.equalsIgnoreCase("Business")){
-            account = new BusinessAccount(initialDeposit);
-        } else{
-            account = new ISAAccount(initialDeposit);
-        }
-
-        Customer customer = new Customer(firstName, lastName, account);
-        Bank.addCustomer(customer);
     }
 
     private int getInput() {
@@ -118,34 +79,104 @@ public class Menu {
         return choice;
     }
 
-    private void printMenu() {
-
-        System.out.println("Please make a Selection: ");
-        System.out.println("1. Create a new account");
-        System.out.println("2. Make a deposit");
-        System.out.println("3. Make a withdrawal");
-        System.out.println("4. Check Account Balance");
-        System.out.println("0. Exit");
+    private void checkBalance() {
     }
 
-    private void printHeader() {
-        System.out.println("+-----------------------------------+");
-        System.out.println("|           Welcome to the          |");
-        System.out.println("|           Novus Bank App          |");
-        System.out.println("+-----------------------------------+");
+    private void makeWithdrawal() {
     }
 
-
-
-public void runMenu(){
-        printHeader();
-
-    while(!exit){
-            printMenu();
-            int choice = getInput();
-            performAction(choice);
+    private void makeDeposit() {
+        int account = selectAccount();
+        if(account >=0 ) {
+            System.out.println("How much would you like to deposit? ");
+            double amount;
+            try{
+                amount = Double.parseDouble(Keyboard.nextLine());
+            } catch(NumberFormatException e){
+                amount = 0;
+            }
+            Bank.getCustomer(account).getAccount().makeDeposit(amount);
         }
-}
+
+    }
+//gets run inside makeDeposit();
+    private int selectAccount() {
+        ArrayList<Customer> customers = bank.getCustomers();
+        if(customers.size() <= 0){
+            System.out.println("No customers at your bank.");
+            return -1;
+        }
+        System.out.println("Select an account: ");
+        for(int i = 0; i< customers.size(); i++){
+            System.out.println((i+1) + ")" + customers.get(i).toString());
+        }
+        int account;
+        System.out.print("Please choose one of the above accounts: ");
+        try {account = Integer.parseInt(Keyboard.nextLine()) -1;
+    }
+        catch(NumberFormatException e){
+            account = -1;
+        }
+        return account;
+    }
+
+    private void createAccount() {
+        boolean valid = false;
+        String firstName, lastName, accountType="";
+        double initialDeposit=0;
+
+
+        while (!valid) {
+            System.out.print("Please enter an account type: Current/Business/ISA");
+            accountType = Keyboard.nextLine();
+            if (accountType.equalsIgnoreCase("Current") || accountType.equalsIgnoreCase("Business") || accountType.equalsIgnoreCase("ISA")) {
+                valid=true;
+            } else {
+                System.out.println("Invalid account type selected. Please enter Current/Business/ISA");
+            }
+        }
+        System.out.print("Please enter your first name: ");
+        firstName=Keyboard.nextLine();
+        System.out.print("Please enter your last name: ");
+        lastName=Keyboard.nextLine();
+
+        valid = false;
+        while(!valid){
+            System.out.println("Please enter an initial deposit");
+            try{
+                initialDeposit = Double.parseDouble(Keyboard.nextLine());
+            } catch (Exception e){
+                System.out.println("Deposit must be a number.");
+            }
+            valid = true;
+
+            if(accountType.equalsIgnoreCase("ISA")){
+                if(initialDeposit < 100){
+                    System.out.println("ISA accounts require a minimum of £100 to open");
+                }
+            }
+        }
+
+        Account account;
+        if(accountType.equalsIgnoreCase("Current")){
+            account = new CurrentAccount(initialDeposit);
+        } else if(accountType.equalsIgnoreCase("Business")){
+            account = new BusinessAccount(initialDeposit);
+        } else{
+            account = new ISAAccount(initialDeposit);
+        }
+
+        Customer customer = new Customer(firstName, lastName, account);
+        Bank.addCustomer(customer);
+    }
+
+
+
+
+
+
+
+
 
 
 

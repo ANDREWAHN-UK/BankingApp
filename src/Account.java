@@ -54,7 +54,7 @@ public class Account {
 
     public void makeDeposit(double amount){
 
-        if(amount < 0){
+        if(amount <= 0){
             System.out.println("You cannot deposit a negative amount.");
             return;
         }
